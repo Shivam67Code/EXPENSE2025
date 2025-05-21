@@ -1,0 +1,4 @@
+[build]
+  base = "frontend/the-expenses"
+  command = "npm run build"
+  publish = "dist"
