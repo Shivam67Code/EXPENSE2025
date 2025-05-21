@@ -52,18 +52,21 @@ const SignUp = () => {
         const imageUploadRes = await uploadImage(profilePic);
         profileImageUrl = imageUploadRes.imageUrl || "";
       }
-         
+       
       const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
         fullName,
         email,
         password,
         profileImageUrl
       });
-      const {token, user} = response.data;
+      
+      // Fix the token extraction - the server returns token directly in response.data
+      const token = response.data.token;
+      const userData = response.data.user || response.data;
       
       if(token) {
         localStorage.setItem("token", token);
-        updateUser(user);
+        updateUser(userData);
         navigate("/dashboard");
       }
     } catch(error) {
