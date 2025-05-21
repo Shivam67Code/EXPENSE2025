@@ -21,6 +21,14 @@ app.use(
 app.use(express.json());
 
 connectDB();
+app.get('/', (req, res) => {
+  res.status(200).json({
+    status: 'success',
+    message: 'API is running successfully',
+    timestamp: new Date().toISOString()
+  });
+});
+
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/income", incomeRoutes);
